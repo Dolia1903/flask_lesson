@@ -1,4 +1,4 @@
-from flask import Flask, make_response
+from flask import Flask, make_response, render_template
 import requests
 
 app = Flask(__name__)
@@ -9,49 +9,51 @@ def index():
     return 'Hello, World!'
 
 
-@app.route('/eur_to_usd/<int:amount>')
-def eur_to_usd(amount):
+def write_to_file(*args):
+    with open('history.txt', 'a') as f:
+        list_to_write = [str(x) for x in [*args]]
+        if len(list_to_write) == 4:
+            f.write(', '.join(list_to_write))
+            f.write('\n')
+
+
+def get_request(currency):
     response = requests.get('https://api.exchangeratesapi.io/latest')
     response_json = response.json()
     rates = response_json["rates"]
-    converted_amount = amount * rates["USD"]
-    f = open("history.html", "a")
-    f.writelines(str(["USD", rates["USD"], amount, converted_amount]))
-    f.close()
+    return rates[currency]
+
+
+@app.route('/eur_to_usd/<int:amount>')
+def eur_to_usd(amount):
+    rate = get_request('USD')
+    converted_amount = amount * rate
+    write_to_file('USD', rate, amount, round(converted_amount, 4))
     return str(converted_amount)
 
 
 @app.route('/eur_to_gbp/<int:amount>')
 def eur_to_gbp(amount):
-    response = requests.get('https://api.exchangeratesapi.io/latest')
-    response_json = response.json()
-    rates = response_json["rates"]
-    converted_amount = amount * rates["GBP"]
-    f = open("history.html", "a")
-    f.writelines(str(["GBP", rates["GBP"], amount, converted_amount]))
-    f.close()
+    rate = get_request('GBP')
+    converted_amount = amount * rate
+    write_to_file('GBP', rate, amount, round(converted_amount, 4))
     return str(converted_amount)
 
 
 @app.route('/eur_to_php/<int:amount>')
 def eur_to_php(amount):
-    response = requests.get('https://api.exchangeratesapi.io/latest')
-    response_json = response.json()
-    rates = response_json["rates"]
-    converted_amount = amount * rates["PHP"]
-    f = open("history.html", "a")
-    f.writelines(str(["PHP", rates["PHP"], amount, converted_amount]))
-    f.close()
+    rate = get_request('PHP')
+    converted_amount = amount * rate
+    write_to_file('PHP', rate, amount, round(converted_amount, 4))
     return str(converted_amount)
 
 
 @app.route('/history/')
 def history():
-    with open("history.html") as f:
-        file_content = f.read()
-    return file_content
+    with open("history.txt", 'r') as f:
+        file_content = f.readlines()
+    return render_template('temp_1.html', file_content=file_content)
 
 
 if __name__ == '__main__':
-    history_file = "history.html"
     app.run(debug=True)
