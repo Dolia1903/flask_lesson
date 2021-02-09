@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Students</title>
+</head>
+<body>
+{% for student in students %}
+    <div>
+        <h1>{{ student.first_name }} {{ student.last_name }}</h1>
+        <p>Email: {{ student.email }}. </p>
+    </div>
+{% endfor %}
+</body>
+</html>

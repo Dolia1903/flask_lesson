@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Groups</title>
+</head>
+<body>
+{% for group in groups %}
+    <div>
+        <h1>{{ group.course }} </h1>
+        <p>Teacher: {{ group.teacher_id }}. </p>
+    </div>
+{% endfor %}
+</body>
+</html>
