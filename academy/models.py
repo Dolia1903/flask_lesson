@@ -20,6 +20,6 @@ class Lecturer(models.Model):
 class Group(models.Model):
     group_id = models.AutoField(primary_key=True)
     course = models.CharField(max_length=50)
-    student = models.ManyToManyField(Student)
+    student = models.ManyToManyField(Student, blank=True)
     teacher = models.ForeignKey(Lecturer, on_delete=models.CASCADE,
-                                related_name='teacher_academy_set')
+                                related_name='teacher_academy_set', blank=True)
