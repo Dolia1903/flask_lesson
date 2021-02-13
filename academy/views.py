@@ -1,7 +1,8 @@
 from django.http import HttpResponse
+# from django.contrib.auth.models import User
 from django.shortcuts import render
-from django.contrib.auth.models import User
-from .models import Student, Lecturer, Group
+
+from .models import Group, Lecturer, Student
 
 
 def get_index(request):
@@ -15,7 +16,8 @@ def get_students(request):
 
 def get_lecturers(request):
     lecturers = Lecturer.objects.all().order_by('last_name')
-    return render(request, 'academy/get_lecturers.html', {'lecturers': lecturers})
+    return render(request, 'academy/get_lecturers.html',
+                  {'lecturers': lecturers})
 
 
 def get_groups(request):
