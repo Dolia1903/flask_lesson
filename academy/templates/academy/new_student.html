@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New Student</title>
+</head>
+<body>
+{% for student in students %}
+{% empty %}
+    <p>There are no students yet.</p>
+{% endfor %}
+
+{% if new_student %}
+    <p>
+    <a href="http://127.0.0.1:8000/students">
+    <input type='submit' value='Back to the Students list'>
+    </a>
+    </p>
+    <b> Your student has been added.</b>
+    {{ student_form.as_p }}
+        {% csrf_token %}
+        <p><input type='submit' value='Add student'></p>
+{% else %}
+    <form method="post">
+        {{ student_form.as_p }}
+        {% csrf_token %}
+        <p><input type='submit' value='Add student'></p>
+    </form>
+{% endif %}
+</body>
+</html>

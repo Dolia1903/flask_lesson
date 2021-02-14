@@ -5,6 +5,11 @@
     <title>Students</title>
 </head>
 <body>
+<p>
+    <a href="students/new">
+    <input type='submit' value='Add student'>
+    </a>
+</p>
 {% for student in students %}
     <div>
         <h1>{{ student.first_name }} {{ student.last_name }}</h1>
