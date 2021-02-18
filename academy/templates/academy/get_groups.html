@@ -5,6 +5,14 @@
     <title>Groups</title>
 </head>
 <body>
+<p>
+    <a href="groups/new"><input type='submit' value='Add group'></a>
+</p>
+{% with groups.count as total_groups %}
+    <i>
+        {{ total_groups }} groups total{{ total_groups|pluralize }}
+    </i>
+{% endwith %}
 {% for group in groups %}
     <div>
         <h1>{{ group.course }} </h1>

@@ -5,6 +5,14 @@
     <title>Lecturers</title>
 </head>
 <body>
+<p>
+    <a href="lecturers/new"><input type='submit' value='Add lecturer'></a>
+</p>
+{% with lecturers.count as total_lecturers %}
+    <i>
+        {{ total_lecturers }} lecturers total{{ total_lecturers|pluralize }}
+    </i>
+{% endwith %}
 {% for lecturer in lecturers %}
     <div>
         <h1>{{ lecturer.first_name }} {{ lecturer.last_name }}</h1>

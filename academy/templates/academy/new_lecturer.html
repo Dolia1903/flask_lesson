@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New Lecturer</title>
+</head>
+<body>
+{% for lecturer in lecturers %}
+{% empty %}
+    <p>There are no lecturers yet.</p>
+{% endfor %}
+
+{% if new_lecturer %}
+    <p>
+    <a href="http://127.0.0.1:8000/lecturers">
+    <input type='submit' value='Back to the Lecturers list'>
+    </a>
+    </p>
+    <b> Your lecturer has been added.</b>
+    {{ lecturer_form.as_p }}
+        {% csrf_token %}
+        <p><input type='submit' value='Add lecturer'></p>
+{% else %}
+    <form method="post">
+        {{ lecturer_form.as_p }}
+        {% csrf_token %}
+        <p><input type='submit' value='Add lecturer'></p>
+    </form>
+{% endif %}
+</body>
+</html>

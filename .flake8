@@ -1,0 +1,6 @@
+[flake8]
+# some comment
+ignore = A003, E128
+max-complexity = 10
+max_line_length = 79
+exclude = tests, setup.py, __init__.py, */migrations/*
