@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> {{lecturer.lecturer_id}} </title>
+</head>
+<body>
+    <p>
+        <a href="{% url 'get_lecturers' %}">Back to Lecturers list</a>
+    </p>
+    <div>
+        <h1>{{ lecturer.first_name }} {{ lecturer.last_name }}</h1>
+        <p> <b>Lecturer's number:</b> {{ lecturer.lecturer_id }}</p>
+        <p> <b>Email:</b> {{ lecturer.email }}</p>
+        {% if user.is_authenticated %}
+            <a href="{% url 'edit_lecturer' lecturer_id=lecturer.lecturer_id %}">
+                <button>Edit</button>
+            </a>
+            <a href="{% url 'delete_lecturer' lecturer_id=lecturer.lecturer_id %}">
+                <button>Delete</button>
+            </a>
+        {% endif %}
+    </div>
+</body>
+</html>

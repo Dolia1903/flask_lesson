@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> {{group.group_id}} </title>
+</head>
+<body>
+    <p>
+        <a href="{% url 'get_groups' %}">Back to Groups list</a>
+    </p>
+    <div>
+        <h1>{{ group.course }}</h1>
+        <p><b>Group's number:</b>{{ group.group_id }}</p>
+        <p>
+            <b>Teacher:</b> {{ teacher.first_name }} {{ teacher.last_name }}
+        </p>
+        <p><b>List of the Students:</b></p>
+        {% for student in students %}
+            <p> {{ student.first_name }} {{ student.last_name }}</p>
+        {% endfor %}
+        {% if user.is_authenticated %}
+            <a href="{% url 'edit_group' group_id=group.group_id %}">
+                <button>Edit</button>
+            </a>
+            <a href="{% url 'delete_group' group_id=group.group_id %}">
+                <button>Delete</button>
+            </a>
+        {% endif %}
+    </div>
+</body>
+</html>
