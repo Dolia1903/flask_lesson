@@ -1,7 +1,7 @@
-from django.http import HttpResponse
+# from django.http import HttpResponse
 # from django.contrib.auth.models import User
-from django.shortcuts import get_object_or_404, render, get_list_or_404, \
-    redirect
+from django.shortcuts import get_list_or_404, get_object_or_404, redirect, \
+    render
 
 from .forms import GroupForm, LecturerForm, StudentForm
 from .models import Group, Lecturer, Student
