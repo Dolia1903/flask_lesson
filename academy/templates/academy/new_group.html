@@ -5,22 +5,15 @@
     <title>New Group</title>
 </head>
 <body>
-{% for group in groups %}
-{% empty %}
+{% if not groups %}
     <p>There are no groups yet.</p>
     <p>You have to create at least one student and teacher before creating group.</p>
-{% endfor %}
+{% endif %}
 
 {% if new_group %}
-    <p>
-    <a href="http://127.0.0.1:8000/groups">
-    <input type='submit' value='Back to the Groups list'>
-    </a>
-    </p>
+    <p><a href="{% url 'get_groups' %}">
+    <input type='submit' value='Back to the Groups list'></a></p>
     <b> Your group has been added.</b>
-    {{ group_form.as_p }}
-        {% csrf_token %}
-        <p><input type='submit' value='Add group'></p>
 {% else %}
     <form method="post">
         {{ group_form.as_p }}

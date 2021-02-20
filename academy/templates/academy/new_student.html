@@ -5,21 +5,14 @@
     <title>New Student</title>
 </head>
 <body>
-{% for student in students %}
-{% empty %}
+{% if not students %}
     <p>There are no students yet.</p>
-{% endfor %}
+{% endif %}
 
 {% if new_student %}
-    <p>
-    <a href="http://127.0.0.1:8000/students">
-    <input type='submit' value='Back to the Students list'>
-    </a>
-    </p>
+    <p><a href="{% url 'get_students' %}">
+    <input type='submit' value='Back to the Students list'></a></p>
     <b> Your student has been added.</b>
-    {{ student_form.as_p }}
-        {% csrf_token %}
-        <p><input type='submit' value='Add student'></p>
 {% else %}
     <form method="post">
         {{ student_form.as_p }}

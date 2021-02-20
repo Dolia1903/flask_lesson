@@ -31,7 +31,7 @@ def edit_student(request, student_id):
             return redirect('get_student', student_id=student_id)
 
     form = StudentForm(instance=student)
-    return render(request, 'academy/edit_student.html', {'form': form})
+    return render(request, 'academy/edit_form.html', {'form': form})
 
 
 def delete_student(request, student_id):
@@ -61,7 +61,7 @@ def edit_lecturer(request, lecturer_id):
             return redirect('get_lecturer', lecturer_id=lecturer_id)
 
     form = LecturerForm(instance=lecturer)
-    return render(request, 'academy/edit_lecturer.html', {'form': form})
+    return render(request, 'academy/edit_form.html', {'form': form})
 
 
 def delete_lecturer(request, lecturer_id):
@@ -94,12 +94,12 @@ def edit_group(request, group_id):
     if request.method == 'POST':
         form = GroupForm(request.POST, instance=group)
         if form.is_valid():
-            group = form.save(commit=False)
+            group = form.save(commit=True)
             group.save()
             return redirect('get_group', group_id=group_id)
 
     form = GroupForm(instance=group)
-    return render(request, 'academy/edit_group.html', {'form': form})
+    return render(request, 'academy/edit_form.html', {'form': form})
 
 
 def delete_group(request, group_id):
