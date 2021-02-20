@@ -6,7 +6,9 @@
 </head>
 <body>
 <p>
-    <a href="groups/new"><input type='submit' value='Add group'></a>
+    {% if user.is_authenticated %}
+        <a href="groups/new"><input type='submit' value='Add group'></a>
+    {% endif %}
 </p>
 {% with groups.count as total_groups %}
     <i>
@@ -15,8 +17,12 @@
 {% endwith %}
 {% for group in groups %}
     <div>
-        <h1>{{ group.course }} </h1>
-        <p>Teacher: {{ group.teacher_id }}. </p>
+        <h2>
+            <a href="{% url 'get_group' group_id=group.group_id %}">
+                {{ group.course }}
+            </a>
+        </h2>
+        <p><b>Teacher:</b>{{ group.teacher_id }}</p>
     </div>
 {% endfor %}
 </body>

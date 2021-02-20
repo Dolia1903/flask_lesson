@@ -6,7 +6,9 @@
 </head>
 <body>
 <p>
-    <a href="lecturers/new"><input type='submit' value='Add lecturer'></a>
+    {% if user.is_authenticated %}
+        <a href="lecturers/new"><input type='submit' value='Add lecturer'></a>
+    {% endif %}
 </p>
 {% with lecturers.count as total_lecturers %}
     <i>
@@ -15,8 +17,12 @@
 {% endwith %}
 {% for lecturer in lecturers %}
     <div>
-        <h1>{{ lecturer.first_name }} {{ lecturer.last_name }}</h1>
-        <p>Email: {{ lecturer.email }}. </p>
+        <h2>
+            <a href="{% url 'get_lecturer' lecturer_id=lecturer.lecturer_id %}">
+                {{ lecturer.first_name }} {{ lecturer.last_name }}
+            </a>
+        </h2>
+        <p><b>Email:</b>{{ lecturer.email }}</p>
     </div>
 {% endfor %}
 </body>

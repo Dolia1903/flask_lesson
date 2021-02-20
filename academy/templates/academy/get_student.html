@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> {{student.student_id}} </title>
+</head>
+<body>
+    <p>
+        <a href="{% url 'get_students' %}">Back to Students list</a>
+    </p>
+    <div>
+        <h1>{{ student.first_name }} {{ student.last_name }}</h1>
+        <p> <b>Student's number:</b> {{ student.student_id }}</p>
+        <p> <b>Email:</b> {{ student.email }}</p>
+        {% if user.is_authenticated %}
+            <a href="{% url 'edit_student' student_id=student.student_id %}">
+                <button>Edit</button>
+            </a>
+            <a href="{% url 'delete_student' student_id=student.student_id %}">
+                <button>Delete</button>
+            </a>
+        {% endif %}
+    </div>
+</body>
+</html>
