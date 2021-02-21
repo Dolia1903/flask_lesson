@@ -6,4 +6,4 @@ class AcademyConfig(AppConfig):
 
     def ready(self):
         import academy.signals
-
+        academy.signals
