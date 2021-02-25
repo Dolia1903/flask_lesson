@@ -116,7 +116,6 @@ def create_student(request):
         student_form = StudentForm(data=request.POST)
         if student_form.is_valid():
             new_student = student_form.save(commit=True)
-            new_student.save()
 
     if request.method == 'GET':
         student_form = StudentForm()
@@ -138,7 +137,6 @@ def create_lecturer(request):
         lecturer_form = LecturerForm(data=request.POST)
         if lecturer_form.is_valid():
             new_lecturer = lecturer_form.save(commit=True)
-            lecturer_form.save()
 
     if request.method == 'GET':
         lecturer_form = LecturerForm()
@@ -160,7 +158,6 @@ def create_group(request):
         group_form = GroupForm(data=request.POST)
         if group_form.is_valid():
             new_group = group_form.save(commit=True)
-            group_form.save()
 
     if request.method == 'GET':
         group_form = GroupForm()
