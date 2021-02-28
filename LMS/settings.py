@@ -21,6 +21,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'zkyxmoz$$r07qwh!zphp_fb5v$49*p*1o$7%i5k=!ifn+_j48q'
+SENDGRID_API_KEY = 'SG.W-h_OaDNQ-SKftRx3_ULDA.gyWVt-j20bH8Q4iE_EhouSCFYyRy' \
+                   'VvdWvVT-8BPXpXI'
+
+CELERY_BROKER_URL = 'amqp://localhost'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -39,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'academy.apps.AcademyConfig',
     'logger',
-    'silk'
+    'silk',
+    'django_celery_beat',
 ]
 
 MIDDLEWARE = [

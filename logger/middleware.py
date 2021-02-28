@@ -9,14 +9,14 @@ class LoggerMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):
-        start = time.time()
         response = self.get_response(request)
-        diff = time.time() - start
-        log = Log(
-            path=request.path,
-            method=request.method,
-            execution_time_sec=diff
-        )
         if not str(request.path).startswith('/admin'):
+            start = time.time()
+            diff = time.time() - start
+            log = Log(
+                path=request.path,
+                method=request.method,
+                execution_time_sec=diff
+            )
             log.save()
         return response

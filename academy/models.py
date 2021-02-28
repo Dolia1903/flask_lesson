@@ -39,3 +39,19 @@ class Group(models.Model):
 
     def __str__(self):
         return f'{self.course}'
+
+
+class ContactAdmin(models.Model):
+    request_id = models.AutoField(primary_key=True)
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=30)
+    email = models.EmailField(max_length=254)
+    message = models.TextField()
+
+    def to_dict(self):
+        return {
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'email': self.email,
+            'message': self.message
+        }

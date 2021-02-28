@@ -28,4 +28,8 @@ urlpatterns = [
     path('groups/new', views.create_group, name='create_group'),
     path('groups/<int:group_id>/delete/', views.delete_group,
          name='delete_group'),
+
+    path('students/contact_admin', views.contact_admin, name='contact_admin'),
+    path('lecturers/contact_admin', views.contact_admin, name='contact_admin'),
+    path('groups/contact_admin', views.contact_admin, name='contact_admin'),
 ]
