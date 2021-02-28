@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, timedelta
 from time import sleep
 
 from LMS.settings import SENDGRID_API_KEY
@@ -46,8 +46,7 @@ app.conf.timezone = 'UTC'
 
 @app.task
 def delete_yesterday_logs():
-    # yesterday_date = date.today() - timedelta(days=1)
-    yesterday_date = date.today()
+    yesterday_date = date.today() - timedelta(days=1)
     yesterday_logs = Log.objects.filter(
         created__day=yesterday_date.strftime('%d')
     )
