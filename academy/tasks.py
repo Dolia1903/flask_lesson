@@ -3,8 +3,7 @@ from time import sleep
 
 from LMS.settings import SENDGRID_API_KEY
 
-from celery import Celery, shared_task
-from celery.schedules import crontab
+from celery import shared_task
 
 from django.template.loader import render_to_string
 
@@ -33,18 +32,7 @@ def send_email(data):
     sg.send(message)
 
 
-app = Celery('LMS')
-
-app.conf.beat_schedule = {
-    'add-every-day-morning': {
-        'task': 'delete_yesterday_logs',
-        'schedule': crontab(minute='*/2'),
-    },
-}
-app.conf.timezone = 'UTC'
-
-
-@app.task
+@shared_task
 def delete_yesterday_logs():
     yesterday_date = date.today() - timedelta(days=1)
     yesterday_logs = Log.objects.filter(
