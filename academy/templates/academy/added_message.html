@@ -1,0 +1,25 @@
+<head>
+    <meta charset="UTF-8">
+    <title>Added new message</title>
+</head>
+<body>
+{% if new_message %}
+    {% if request.path == '/students/contact_admin' %}
+        <p><a href="{% url 'get_students' %}">
+        <input type='submit' value='Back to the Students list'></a></p>
+    {% elif request.path == '/lecturers/contact_admin' %}
+        <p><a href="{% url 'get_lecturers' %}">
+        <input type='submit' value='Back to the Lecturers list'></a></p>
+    {% elif request.path == '/groups/contact_admin' %}
+        <p><a href="{% url 'get_groups' %}">
+        <input type='submit' value='Back to the Groups list'></a></p>
+    {% endif %}
+    <b> Your message has been sent.</b>
+{% else %}
+    <form method="post">
+        {{ contact_form.as_p }}
+        {% csrf_token %}
+        <p><input type='submit' value='Add message'></p>
+    </form>
+{% endif %}
+</body>

@@ -3,3 +3,7 @@
 *.sqlite3
 venv/
 __pycache__/
+sendgrid.env
+sendgrid_test.py
+rabbitmq-signing-key-public.asc
+erlang-solutions_1.0_all.deb

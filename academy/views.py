@@ -3,7 +3,7 @@
 from django.shortcuts import get_list_or_404, get_object_or_404, redirect, \
     render
 
-from .forms import GroupForm, LecturerForm, StudentForm
+from .forms import ContactForm, GroupForm, LecturerForm, StudentForm
 from .models import Group, Lecturer, Student
 
 
@@ -169,3 +169,22 @@ def create_group(request):
     }
 
     return render(request, 'academy/new_group.html', context)
+
+
+def contact_admin(request):
+    new_message = None
+
+    if request.method == 'POST':
+        contact_form = ContactForm(data=request.POST)
+        if contact_form.is_valid():
+            new_message = contact_form.save(commit=True)
+
+    if request.method == 'GET':
+        contact_form = ContactForm()
+
+    context = {
+        'new_message': new_message,
+        'contact_form': contact_form,
+    }
+
+    return render(request, 'academy/added_message.html', context)
