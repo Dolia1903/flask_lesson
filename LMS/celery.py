@@ -20,7 +20,8 @@ app.conf.beat_schedule = {
     'delete_yesterday_logs': {
         'task': 'academy.tasks.delete_yesterday_logs',
         'schedule': crontab(minute=30, hour=9),
-        # 'schedule': crontab(minute='*/2'), это для теста было
+        # 'schedule': crontab(minute='*/2'),
+        # это для теста было
     },
 }
 app.conf.timezone = 'UTC'

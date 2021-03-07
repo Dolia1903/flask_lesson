@@ -27,7 +27,6 @@ def send_email(data):
         subject='New contact message',
         html_content=content
     )
-    sleep(15)
     sg = SendGridAPIClient(SENDGRID_API_KEY)
     sg.send(message)
 
@@ -35,6 +34,8 @@ def send_email(data):
 @shared_task
 def delete_yesterday_logs():
     yesterday_date = date.today() - timedelta(days=1)
+    # yesterday_date = date.today()
+    # это для тестов
     yesterday_logs = Log.objects.filter(
         created__day=yesterday_date.strftime('%d')
     )
